@@ -23,7 +23,8 @@ class ResourceServer:
         pass
 
     def request_listener(self, unique_id):
-        data = DB_Helper.fetch_record(unique_id=unique_id)
+        db_helper = DB_Helper()
+        data = db_helper.fetch_record(unique_id=unique_id)
         print(data)
         return '<p>Displaying the data</p>'
 
