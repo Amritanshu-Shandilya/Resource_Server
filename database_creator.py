@@ -34,5 +34,5 @@ cur = con.cursor()
 # con.commit()
 
 "Displaying the data"
-res = cur.execute("SELECT File_Name FROM files")
-print(res.fetchall())
+# res = cur.execute("SELECT File_Name FROM files")
+# print(res.fetchall())
