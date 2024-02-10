@@ -28,4 +28,4 @@ class ResourceServer:
 
 if __name__ == '__main__':
     my_server = ResourceServer(__name__)
-    my_server.run(debug=True)
+    my_server.run(host='0.0.0.0' ,debug=True)
