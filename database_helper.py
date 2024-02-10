@@ -14,7 +14,21 @@ class DB_Helper:
         self.con.commit()
         return True
     
+    def fetch_record(self, unique_id):
+        '''This function extracts the records from the files database and forms a path using it.'''
+        query = "SELECT * FROM files WHERE File_Unique_ID = '"+unique_id+"';"
+        res = self.cur.execute(query)
+        return res.fetchall()
+        
 
     def add_to_history(self, data):
         ''' Inserts data into the history table. '''
         pass
+
+
+
+
+if __name__ == '__main__':
+    db_helper = DB_Helper()
+    # record = db_helper.fetch_record('20240209-XyZ67AbCde')
+    # print(record)
