@@ -11,7 +11,7 @@ class ResourceServer:
 
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
-        self.resource_server.route('/get_data')(self.request_listener)
+        self.resource_server.route('/get_data/<unique_id>')(self.request_listener)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -23,7 +23,7 @@ class ResourceServer:
         pass
 
     def request_listener(self, unique_id):
-        data = DB_Helper.fetch_record(unique_id)
+        data = DB_Helper.fetch_record(unique_id=unique_id)
         print(data)
         return '<p>Displaying the data</p>'
 
