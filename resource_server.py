@@ -11,6 +11,7 @@ class ResourceServer:
 
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
+        self.resource_server.route('/get_data')(self.request_listener)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -18,12 +19,15 @@ class ResourceServer:
     def home_screen(self):
         return render_template('home_page.html')
     
-    def request_processor(self):
+    def request_processor(self, path):
         pass
 
-    def request_listener(self):
-        pass
-    
+    def request_listener(self, unique_id):
+        data = DB_Helper.fetch_record(unique_id)
+        print(data)
+        return '<p>Displaying the data</p>'
+
+        
 
 
 if __name__ == '__main__':
