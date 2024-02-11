@@ -37,7 +37,7 @@ class ResourceServer:
     def request_listener(self, unique_id):
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
         
-        self.request_processor()
+        return self.request_processor()
 
         
 
