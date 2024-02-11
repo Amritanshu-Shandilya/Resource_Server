@@ -27,7 +27,7 @@ class ResourceServer:
     def request_processor(self):
         id, name, lv1, lv2, lv3 = self.extracted_data
         # creating the path
-        path = '/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
+        path = 'E:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
 
         with open(path, 'r') as file:
             file_content = file.read()
