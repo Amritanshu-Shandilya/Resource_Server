@@ -17,6 +17,7 @@ class ResourceServer:
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<unique_id>')(self.request_listener)
+        self.resource_server.route('/get_name/<unique_id>')(self.get_name)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -38,6 +39,10 @@ class ResourceServer:
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
         
         return self.request_processor()
+    
+    def get_name(self, unique_id):
+        name = self.db_helper.fetch_name(unique_id=unique_id)
+        return name
 
         
 
