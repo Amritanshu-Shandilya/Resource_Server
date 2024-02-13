@@ -36,3 +36,31 @@ cur = con.cursor()
 "Displaying the data"
 # res = cur.execute("SELECT File_Name FROM files")
 # print(res.fetchall())
+
+
+"User table creation"
+# query = "CREATE TABLE users(User_id, User_name)"
+# cur.execute(query)
+
+"Verifying the creation of tables"
+# res = cur.execute("SELECT name FROM sqlite_master")
+# print(res.fetchall())
+
+"Inserting my user name into the database"
+# query = "INSERT INTO users VALUES('amrit_sandy02', 'Amritanshu')"
+# cur.execute(query)
+# con.commit()
+
+"Veiwing the data stored inside the table"
+# query = "SELECT * FROM users"
+# res = cur.execute(query)
+# print(res.fetchall())
+
+
+"User_history table creation"
+# query = "CREATE TABLE history(User_id, File_Unique_Id, Time_stamp)"
+# cur.execute(query)
+
+"Verifying the creation of tables"
+# res = cur.execute("SELECT name FROM sqlite_master")
+# print(res.fetchall())
