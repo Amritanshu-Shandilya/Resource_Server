@@ -23,9 +23,15 @@ class ResourceServer:
         self.resource_server.run(**kwargs)
 
     def home_screen(self):
+        '''This functions is used to render a homescreen on the server.'''
         return render_template('home_page.html')
     
+    def block_user(Self):
+        '''This function is used to render an access denied screen on the server'''
+        return render_template('access_denied.html')
+    
     def request_processor(self):
+        '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''
         id, name, lv1, lv2, lv3 = self.extracted_data
         # creating the path
         path = 'E:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
@@ -34,8 +40,14 @@ class ResourceServer:
             file_content = file.read()
         
         return file_content
+    
+    def authenticate(slef, user_id):
+        '''This function ensures that the user accessing the id is a registered user and returns True if it is.'''
+        pass
 
     def request_listener(self, user_id, unique_id, time_stamp):
+        '''This function listens the requests and processes it to get the record of the accessed file and sends it to be processed. 
+            It also adds request to history and authenticates the client'''
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
 
         if self.db_helper.add_to_history(user_id, unique_id, time_stamp):
@@ -43,6 +55,7 @@ class ResourceServer:
     
 
     def get_name(self, unique_id):
+        '''This fucntion fetches the name of the file using the unique id'''
         name = self.db_helper.fetch_name(unique_id=unique_id)
         return name
 
