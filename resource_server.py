@@ -41,17 +41,18 @@ class ResourceServer:
         
         return file_content
     
-    def authenticate(slef, user_id):
-        '''This function ensures that the user accessing the id is a registered user and returns True if it is.'''
-        pass
 
     def request_listener(self, user_id, unique_id, time_stamp):
         '''This function listens the requests and processes it to get the record of the accessed file and sends it to be processed. 
             It also adds request to history and authenticates the client'''
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
 
-        if self.db_helper.add_to_history(user_id, unique_id, time_stamp):
-            return self.request_processor()
+        if self.db_helper.authenticate_user(user_id):
+            if self.db_helper.add_to_history(user_id, unique_id, time_stamp):
+                return self.request_processor()
+        else:
+            return self.block_user()
+        
     
 
     def get_name(self, unique_id):
