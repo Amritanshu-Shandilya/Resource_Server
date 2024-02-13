@@ -27,9 +27,13 @@ class DB_Helper:
         return res.fetchall()[0][0]
         
 
-    def add_to_history(self, data):
+    def add_to_history(self, user_id, unique_id, time_stamp):
         ''' Inserts data into the history table. '''
-        pass
+        tuple = (user_id, unique_id, time_stamp)
+        query = "INSERT INTO history values (?, ?, ?)"
+        self.cur.execute(query, tuple)
+        self.con.commit()
+        return True
 
 
 
