@@ -16,7 +16,7 @@ class ResourceServer:
 
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
-        self.resource_server.route('/get_data/<unique_id>')(self.request_listener)
+        self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
 
     def run(self, **kwargs):
@@ -35,11 +35,13 @@ class ResourceServer:
         
         return file_content
 
-    def request_listener(self, unique_id):
+    def request_listener(self, user_id, unique_id, time_stamp):
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
-        
-        return self.request_processor()
+
+        if self.db_helper.add_to_history(user_id, unique_id, time_stamp):
+            return self.request_processor()
     
+
     def get_name(self, unique_id):
         name = self.db_helper.fetch_name(unique_id=unique_id)
         return name
