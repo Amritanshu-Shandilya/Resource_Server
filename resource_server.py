@@ -17,7 +17,7 @@ class ResourceServer:
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
-        #self.resource_server.route('/get_name/<unique_id>')(self.get_name)
+        self.resource_server.route('/get_name/<unique_id>')(self.get_name)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -29,6 +29,10 @@ class ResourceServer:
     def block_user(Self):
         '''This function is used to render an access denied screen on the server'''
         return render_template('access_denied.html')
+    
+    def get_name(self, unique_id):
+        file_name = self.db_helper.fetch_name(unique_id)
+        return file_name
     
     def request_processor(self):
         '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''

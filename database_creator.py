@@ -43,8 +43,8 @@ cur = con.cursor()
 # cur.execute(query)
 
 "Verifying the creation of tables"
-res = cur.execute("SELECT name FROM sqlite_master")
-print(res.fetchall())
+# res = cur.execute("SELECT name FROM sqlite_master")
+# print(res.fetchall())
 
 "Inserting my user name into the database"
 # query = "INSERT INTO users VALUES('amrit_sandy02', 'Amritanshu')"
