@@ -38,7 +38,7 @@ class ResourceServer:
         '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''
         id, name, lv1, lv2, lv3 = self.extracted_data
         # creating the path
-        path = 'E:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
+        path = 'D:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
 
         with open(path, 'r') as file:
             file_content = file.read()
@@ -46,12 +46,23 @@ class ResourceServer:
         return file_content
     
 
+    def authenticator(self, user_id):
+        if self.db_helper.authenticate_user(user_id):
+            return self.request_processor()
+        
+    def add_history(self, user_id, unique_id, timestamp):
+        if self.db_helper.add_to_history(user_id, unique_id, timestamp):
+            return True
+
     def request_listener(self, user_id, unique_id, time_stamp):
         '''This function listens the requests and processes it to get the record of the accessed file and sends it to be processed. 
             It also adds request to history and authenticates the client'''
-        self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
-        
-        return self.request_processor()
+        # Adds the request to the history 
+
+        if self.add_history(user_id, unique_id, time_stamp):
+            self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
+            # Sends the control to the authenticator
+            return self.authenticator(unique_id)
 
         
 
