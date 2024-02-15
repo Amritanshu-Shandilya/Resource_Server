@@ -46,19 +46,8 @@ class ResourceServer:
         '''This function listens the requests and processes it to get the record of the accessed file and sends it to be processed. 
             It also adds request to history and authenticates the client'''
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
-
-        if self.db_helper.authenticate_user(user_id):
-            if self.db_helper.add_to_history(user_id, unique_id, time_stamp):
-                return self.request_processor()
-        else:
-            return self.block_user()
         
-    
-
-    def get_name(self, unique_id):
-        '''This fucntion fetches the name of the file using the unique id'''
-        name = self.db_helper.fetch_name(unique_id=unique_id)
-        return name
+        self.request_processor()
 
         
 
