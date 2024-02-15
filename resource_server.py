@@ -17,7 +17,7 @@ class ResourceServer:
     def setup_routes(self):
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
-        self.resource_server.route('/get_name/<unique_id>')(self.get_name)
+        #self.resource_server.route('/get_name/<unique_id>')(self.get_name)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -47,7 +47,7 @@ class ResourceServer:
             It also adds request to history and authenticates the client'''
         self.extracted_data = self.db_helper.fetch_record(unique_id=unique_id)[0]
         
-        self.request_processor()
+        return self.request_processor()
 
         
 
