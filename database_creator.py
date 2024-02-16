@@ -64,3 +64,10 @@ cur = con.cursor()
 "Verifying the creation of tables"
 # res = cur.execute("SELECT name FROM sqlite_master")
 # print(res.fetchall())
+
+
+"Creating a database to store details about the authorized people who can modify the data stored on the server."
+# query = "CREATE TABLE authorized_personnel(Id, Name, Email, Password, Role)"
+# cur.execute(query)
+# res = cur.execute("SELECT name from sqlite_master")
+# print(res.fetchall())
