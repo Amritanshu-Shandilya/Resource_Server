@@ -19,6 +19,7 @@ class ResourceServer:
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
         self.resource_server.route('/login')(self.login_module)
+        self.resource_server.route('/register')(self.register_module)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -34,6 +35,9 @@ class ResourceServer:
     def login_module(self):
         '''This function is used to render a login page that will be used to log in to as the admin or manager or staff roles.'''
         return render_template('login.html')
+    
+    def register_module(self):
+        return render_template('register.html')
 
     def get_name(self, unique_id):
         file_name = self.db_helper.fetch_name(unique_id)
