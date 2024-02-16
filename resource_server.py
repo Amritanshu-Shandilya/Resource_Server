@@ -18,6 +18,7 @@ class ResourceServer:
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
+        self.resource_server.route('/login')(self.login_module)
 
     def run(self, **kwargs):
         self.resource_server.run(**kwargs)
@@ -30,6 +31,10 @@ class ResourceServer:
         '''This function is used to render an access denied screen on the server'''
         return render_template('access_denied.html')
     
+    def login_module(self):
+        '''This function is used to render a login page that will be used to log in to as the admin or manager or staff roles.'''
+        return render_template('login.html')
+
     def get_name(self, unique_id):
         file_name = self.db_helper.fetch_name(unique_id)
         return file_name
