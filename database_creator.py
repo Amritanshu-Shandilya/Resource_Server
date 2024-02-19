@@ -95,10 +95,11 @@ cur = conn.cursor()
             # );
             # '''
 
-# cur.execute(query)
+query = "SELECT * FROM admin"
+res=cur.execute(query)
 # conn.commit()
 
 
 
 # res = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-# print(res.fetchall())
+print(res.fetchall())
