@@ -1,32 +1,39 @@
 import sqlite3
 
-def drop_all_tables(database_path):
-    try:
-        # Connect to the database
-        conn = sqlite3.connect(database_path)
-        cursor = conn.cursor()
+conn = sqlite3.connect('museum.db')
+cur = conn.cursor()
 
-        # Get a list of all tables in the database
-        cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tables = cursor.fetchall()
+"Create the files table to hold data about files"
+# query = '''
+# CREATE TABLE IF NOT EXISTS files (
+#     file_unique_id TEXT PRIMARY KEY,
+#     file_name TEXT,
+#     lvl1 TEXT,
+#     lvl2 TEXT,
+#     lvl3 TEXT,
+#     tag_id TEXT UNIQUE
+# );'''
 
-        # Drop each table in the list
-        for table in tables:
-            table_name = table[0]
-            cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
-            print(f"Table '{table_name}' dropped.")
+"Create the users table to hold data about users"
+# query='''
+# CREATE TABLE IF NOT EXISTS users (
+#     user_id TEXT PRIMARY KEY,
+#     user_name TEXT
+# );
+# '''
 
-        # Commit the changes and close the connection
-        conn.commit()
-        conn.close()
+"Create the request_history database for storing the history of the markers scanned"
+# query = '''
+# CREATE TABLE IF NOT EXISTS history (
+#     user_id TEXT,
+#     file_unique_id TEXT,
+#     timestamp TEXT,
+#     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+#     FOREIGN KEY (file_unique_id) REFERENCES files(file_unique_id) ON DELETE CASCADE ON UPDATE CASCADE
+# );'''
 
-        print("All tables dropped successfully.")
-
-    except sqlite3.Error as e:
-        print(f"SQLite error: {e}")
-
-# Specify the path to your database
-database_path = 'path_to_your_database.db'
-
-# Call the function to drop all tables
-drop_all_tables('file_database.db')
+"Verify the creation of the tables"
+query = "SELECT name FROM sqlite_master WHERE type='table';"
+res = cur.execute(query)
+print(res.fetchall())
+# conn.commit()
