@@ -1,7 +1,7 @@
 import sqlite3
 
-conn = sqlite3.connect('museum.db')
-cur = conn.cursor()
+# conn = sqlite3.connect('museum.db')
+# cur = conn.cursor()
 
 "Create the files table to hold data about files"
 # query = '''
@@ -64,4 +64,41 @@ cur = conn.cursor()
 
 
 
-conn.close()
+# conn.close()
+
+
+
+"Creating a table to store admin data"
+conn = sqlite3.connect('admin.db')
+cur = conn.cursor()
+
+# query = '''
+# CREATE TABLE IF NOT EXISTS admin (
+#     name TEXT,
+#     admin_id TEXT,
+#     email TEXT,
+#     password TEXT
+# );
+# '''
+
+"Inserting data into admin table"
+# query = '''
+# INSERT INTO admin VALUES('Amritanshu','amrit_admin_01','sandyamritanshu9715@gmail.com','uhsNatirma1342!')
+# '''
+            # "For deleting duplicate values"
+            # query = '''CREATE TABLE IF NOT EXISTS your_table (
+            #     rowid INTEGER PRIMARY KEY,
+            #     name TEXT,
+            #     admin_id TEXT,
+            #     email TEXT,
+            #     password TEXT
+            # );
+            # '''
+
+# cur.execute(query)
+# conn.commit()
+
+
+
+# res = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
+# print(res.fetchall())
