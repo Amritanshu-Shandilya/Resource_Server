@@ -1,8 +1,11 @@
 from flask import Flask
 from flask import render_template
-from flask import request
+from flask import request,redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
-from database_helper import DB_Helper
+
+from database_helper import DB_Helper, AdminLogin
 
 class ResourceServer:
     def __init__(self, name) -> None:
@@ -18,7 +21,8 @@ class ResourceServer:
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
-        self.resource_server.route('/login')(self.login_module)
+        self.resource_server.route('/login', methods = ['POST'])(self.login_module)
+        
         
 
     def run(self, **kwargs):
@@ -32,10 +36,23 @@ class ResourceServer:
         '''This function is used to render an access denied screen on the server'''
         return render_template('access_denied.html')
     
-    def login_module(self):
+    def login_screen(self):
         '''This function is used to render a login page that will be used to log in to as the admin or manager or staff roles.'''
         return render_template('login.html')
     
+
+    def login_module(self):
+        '''This function is used to do the verification model'''
+        if request.method == 'POST':
+            user_name = request.form.get('username')
+            password = request.form.get('password')
+
+            if AdminLogin.login_verification(user_name, password):
+                return render_template('admin_dashboard.html')
+            else:
+                self.block_user()
+        
+
 
     def get_name(self, unique_id):
         file_name = self.db_helper.fetch_name(unique_id)

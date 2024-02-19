@@ -1,9 +1,10 @@
 import sqlite3
+from werkzeug.security import check_password_hash
 
 
 class DB_Helper:
     def __init__(self) -> None:
-        self.con = sqlite3.connect('file_database.db',check_same_thread=False)
+        self.con = sqlite3.connect('museum.db',check_same_thread=False)
         self.cur = self.con.cursor()
 
     def authenticate_user(self, user_id):
@@ -42,7 +43,22 @@ class DB_Helper:
         self.con.commit()
         return True
 
+class AdminLogin:
+    def __init__(self):
+        self.admin_con = sqlite3.connect('admin.db')
+        self.admin_cur = self.admin_con.cursor()
 
+
+    def login_verification(self, uname, pwd):
+        '''This function is used to authenticate the login'''
+        query = "SELECT * FROM admin WHERE admin_id=?"
+        self.admin_cur.execute(query, (uname,))
+        record = self.admin_cur.fetchone()
+
+        if record and check_password_hash(record[3], pwd):  
+            return True
+        else:
+            return False
 
 
 if __name__ == '__main__':
