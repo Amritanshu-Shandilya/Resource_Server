@@ -1,8 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request,redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
+
+import hashlib
 
 
 from database_helper import DB_Helper, AdminLogin
@@ -11,6 +11,7 @@ class ResourceServer:
     def __init__(self, name) -> None:
 
         self.db_helper = DB_Helper()
+        self.admin_login = AdminLogin()
 
         self.extracted_data = None
 
@@ -21,7 +22,7 @@ class ResourceServer:
         self.resource_server.route('/')(self.home_screen)
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
-        self.resource_server.route('/login', methods = ['POST'])(self.login_module)
+        self.resource_server.route('/login', methods = ['GET','POST'])(self.login_module)
         
         
 
@@ -45,13 +46,15 @@ class ResourceServer:
         '''This function is used to do the verification model'''
         if request.method == 'POST':
             user_name = request.form.get('username')
-            password = request.form.get('password')
+            pwd = request.form.get('password')
 
-            if AdminLogin.login_verification(user_name, password):
+            password = hashlib.sha256(pwd.encode()).hexdigest()
+
+            if self.admin_login.login_verification(uname= user_name, pwd= password):
                 return render_template('admin_dashboard.html')
             else:
                 self.block_user()
-        
+        return render_template("login.html")
 
 
     def get_name(self, unique_id):

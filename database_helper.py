@@ -56,6 +56,7 @@ class AdminLogin:
         record = self.admin_cur.fetchone()
 
         if record and check_password_hash(record[3], pwd):  
+            self.admin_con.close()
             return True
         else:
             return False
