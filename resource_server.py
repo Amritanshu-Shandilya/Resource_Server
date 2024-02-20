@@ -53,7 +53,8 @@ class ResourceServer:
             if self.admin_login.login_verification(uname= user_name, pwd= password):
                 return render_template('admin_dashboard.html')
             else:
-                self.block_user()
+                return render_template('access_denied.html')
+        # If the request method is not 'POST', return a default response
         return render_template("login.html")
 
 

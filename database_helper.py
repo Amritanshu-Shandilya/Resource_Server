@@ -45,7 +45,7 @@ class DB_Helper:
 
 class AdminLogin:
     def __init__(self):
-        self.admin_con = sqlite3.connect('admin.db')
+        self.admin_con = sqlite3.connect('admin.db', check_same_thread=False)
         self.admin_cur = self.admin_con.cursor()
 
 
@@ -55,7 +55,7 @@ class AdminLogin:
         self.admin_cur.execute(query, (uname,))
         record = self.admin_cur.fetchone()
 
-        if record and check_password_hash(record[3], pwd):  
+        if record and pwd == record[3]:  
             self.admin_con.close()
             return True
         else:
