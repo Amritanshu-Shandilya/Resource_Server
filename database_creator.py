@@ -69,6 +69,8 @@ import sqlite3
 
 
 "Creating a table to store admin data"
+
+import hashlib
 conn = sqlite3.connect('admin.db')
 cur = conn.cursor()
 
@@ -81,9 +83,27 @@ cur = conn.cursor()
 # );
 # '''
 
+"Seeing the structure of admin table"
+# cur.execute(f"PRAGMA table_info({'admin'})")
+
+# # Fetch and print the results
+# columns = cur.fetchall()
+# for column in columns:
+#     print(column)
+
+# conn.close()
+
 "Inserting data into admin table"
+# name = 'Amritanshu'
+# admin_id ='amrit_admin_01'
+# email = 'sandyamritanshu9715@gmail.com'
+# password = hashlib.sha256('uhsNatirma1342!'.encode()).hexdigest()
+
+
+# data = (name, admin_id, email, password)
+
 # query = '''
-# INSERT INTO admin VALUES('Amritanshu','amrit_admin_01','sandyamritanshu9715@gmail.com','uhsNatirma1342!')
+# INSERT INTO admin VALUES(?,?,?,?)
 # '''
             # "For deleting duplicate values"
             # query = '''CREATE TABLE IF NOT EXISTS your_table (
@@ -95,11 +115,15 @@ cur = conn.cursor()
             # );
             # '''
 
-query = "SELECT * FROM admin"
-res=cur.execute(query)
+# query = "SELECT * FROM admin"
+
+# query = "DELETE FROM admin"
+# cur.execute(query, data)
 # conn.commit()
 
 
 
-# res = cur.execute("SELECT name FROM sqlite_master WHERE type='table';")
-print(res.fetchall())
+# res = cur.execute("SELECT name FROM sqlite_master")
+# print(res.fetchall())
+
+conn.close()
