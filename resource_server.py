@@ -5,13 +5,13 @@ from flask import request,redirect, url_for
 import hashlib
 
 
-from database_helper import DB_Helper, AdminLogin
+from database_helper import DB_Helper, Admin
 
 class ResourceServer:
     def __init__(self, name) -> None:
 
         self.db_helper = DB_Helper()
-        self.admin_login = AdminLogin()
+        self.admin = Admin()
 
         self.extracted_data = None
 
@@ -23,6 +23,7 @@ class ResourceServer:
         self.resource_server.route('/get_data/<user_id>/<unique_id>/<time_stamp>')(self.request_listener)
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
         self.resource_server.route('/login', methods = ['GET','POST'])(self.login_module)
+        self.resource_server.route('/admin')(self.admin_dashboard)
         
         
 
@@ -42,6 +43,13 @@ class ResourceServer:
         return render_template('login.html')
     
 
+    def admin_dashboard(self):
+        
+        name = self.admin.getname()
+
+        return render_template('admin_dashboard.html', admin_name = name[0])
+
+
     def login_module(self):
         '''This function is used to do the verification model'''
         if request.method == 'POST':
@@ -50,8 +58,9 @@ class ResourceServer:
 
             password = hashlib.sha256(pwd.encode()).hexdigest()
 
-            if self.admin_login.login_verification(uname= user_name, pwd= password):
-                return render_template('admin_dashboard.html')
+            if self.admin.login_verification(uname= user_name, pwd= password):
+                return redirect(url_for('admin_dashboard'))
+
             else:
                 return render_template('access_denied.html')
         # If the request method is not 'POST', return a default response
