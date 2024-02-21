@@ -57,7 +57,6 @@
         }
 
         .sidebar a {
-            padding: 15px 15px 15px 30px;
             text-decoration: none;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-size: 18px;
@@ -65,13 +64,20 @@
             display: block;
             transition: 0.3s;
         }
+        
+        .file{
+            position: absolute;
+            bottom: 70%;
+            left: 28%;
+        }
+
+        .review{
+            position: absolute;
+            bottom: 64%;
+        }
 
         .sidebar a:hover {
             color: #3498db;
-        }
-
-        .sidebar a:last-child {
-            margin-top: auto; /* Push the last link (LOGOUT) to the bottom */
         }
 
         .content {
@@ -90,9 +96,13 @@
             text-decoration: none;
             margin-bottom: 40px;
             text-align: center;
-            margin-right: 20px;
+            position: absolute;
+            top:85%;
+            right: 32%;
             color: #3498db; /* Set the link color to blue */
             align-self: flex-end; /* Align at the bottom of the sidebar */
+            font-size: 20px;
+            font-weight: 600;
         }
 
     </style>
@@ -103,13 +113,13 @@
     <h1>InfoVeiwer</h1>
     <img src="/static/logo.png" alt="Your Logo">
 
-    <h2>Welcome {{admin_name}}</h2>
+    <h2>Welcome back {{admin_name}}!</h2>
 </header>
 <!-- Sidebar -->
 <div class="sidebar">
     
-    <a href="#">Add a File</a>
-    <a href="#">Review Change Requests</a>
+    <a href="#" class="file">Add a File</a>
+    <a href="#" class="review">Review Change Requests</a>
     <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
