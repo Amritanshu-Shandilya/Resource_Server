@@ -74,6 +74,7 @@
         .review{
             position: absolute;
             bottom: 64%;
+            right: 17%;
         }
 
         .sidebar a:hover {
@@ -105,6 +106,64 @@
             font-weight: 600;
         }
 
+        /*Form Styles*/
+
+        .form-container {
+            /*Fix the css to display a box arround frame if you wish to*/
+            /* width: 65%;
+            height: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+            width: calc(100% - 240px); /* Adjust width based on your design */
+            position: absolute;
+            right: 0;
+            top: 100px;
+            display: none; /* Form is initially hidden */
+            background-color: #fff;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        label {
+            margin-bottom: 10px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        input, select {
+            margin-bottom: 15px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: calc(100%-22px);
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 12px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
     </style>
 </head>
 <body>
@@ -118,14 +177,54 @@
 <!-- Sidebar -->
 <div class="sidebar">
     
-    <a href="#" class="file">Add a File</a>
-    <a href="#" class="review">Review Change Requests</a>
+    <a href="#" class="file" onclick="showForm()">Add a File</a>
+    <a href="#" class="review">Change Requests</a>
     <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
 
 <div class="vertical-line"></div>
 
+<!-- Adding new record in database form -->
+<div class="form-container" id="fileForm">
+    <form>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="level1">Level 1:</label>
+        <select id="level1" name="level1" required>
+            <option value="text">text</option>
+        </select>
+
+        <label for="level2">Level 2:</label>
+        <select id="level2" name="level2" required>
+            <option value="information">Information</option>
+        </select>
+
+        <label for="level3">Level 3:</label>
+        <select id="level3" name="level3" required>
+            <option value="dinosaur">Dinosaur</option>
+            <option value="paintings">Paintings</option>
+            <option value="history">History</option>
+        </select>
+
+        <label for="file">Upload .txt file:</label>
+        <input type="file" id="file" name="file" accept=".txt" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+</div>
+
+<script>
+    function showForm() {
+        var form = document.getElementById('fileForm');
+        form.style.display = 'block';
+    }
+
+    function submitForm() {
+        // Add logic to handle form submission here
+    }
+</script>
 
 </body>
 </html>
