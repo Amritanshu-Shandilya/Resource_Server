@@ -13,10 +13,14 @@
         }
 
         header {
+            position: fixed;
             background-color: #fff ;
             color: #3498db;
             padding: 30px;
             text-align: left;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         header h1 {
@@ -46,9 +50,10 @@
             background-color: #fff;
             padding-top: 20px;
             position: fixed;
-            height: 100%;
-            overflow: auto;
-            transition: 0.5s;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .sidebar a {
@@ -65,6 +70,10 @@
             color: #3498db;
         }
 
+        .sidebar a:last-child {
+            margin-top: auto; /* Push the last link (LOGOUT) to the bottom */
+        }
+
         .content {
             margin-left: 200px;
             padding: 16px;
@@ -74,7 +83,16 @@
         .vertical-line {
             border-left: 1px solid black; /* Add a vertical line between content and sidebar */
             height: 100vh; /* Set the height of the line to match the viewport */
-            margin-left: 200px; /* Adjust the margin as needed */
+            margin-left: 200px; 
+        }
+
+        .logout-link {
+            text-decoration: none;
+            margin-bottom: 40px;
+            text-align: center;
+            margin-right: 20px;
+            color: #3498db; /* Set the link color to blue */
+            align-self: flex-end; /* Align at the bottom of the sidebar */
         }
 
     </style>
@@ -92,6 +110,7 @@
     
     <a href="#">Add a File</a>
     <a href="#">Review Change Requests</a>
+    <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
 
