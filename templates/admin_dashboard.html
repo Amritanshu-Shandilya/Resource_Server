@@ -71,6 +71,31 @@
             left: 28%;
         }
 
+        .file.active {
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        border: 2px solid #fff;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 15px;
+        display: block;
+        }
+
+        /* Override hover styles for the active state */
+        .file.active:hover {
+            background-color: #3498db;
+            color: #fff;
+        }
+
+        .history{
+            position: absolute;
+            bottom: 58%;
+            left: 25%;
+        }
+
         .review{
             position: absolute;
             bottom: 64%;
@@ -120,7 +145,7 @@
             width: calc(100% - 240px); /* Adjust width based on your design */
             position: absolute;
             right: 0;
-            top: 100px;
+            top: 155px;
             display: none; /* Form is initially hidden */
             background-color: #fff;
         }
@@ -177,8 +202,9 @@
 <!-- Sidebar -->
 <div class="sidebar">
     
-    <a href="#" class="file" onclick="showForm()">Add a File</a>
+    <a href="#" class="file" id="addfilebutton" onclick="showForm()">Add a File</a>
     <a href="#" class="review">Change Requests</a>
+    <a href="#" class="history">Veiw History</a>
     <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
@@ -217,13 +243,54 @@
 
 <script>
     function showForm() {
+        var addButton = document.getElementById('addfilebutton');
+        addButton.classList.toggle('active');
+
         var form = document.getElementById('fileForm');
         form.style.display = 'block';
     }
 
     function submitForm() {
-        // Add logic to handle form submission here
-    }
+        var name = document.getElementById('name').value;
+        var level1 = document.getElementById('level1').value;
+        var level2 = document.getElementById('level2').value;
+        var level3 = document.getElementById('level3').value;
+        var fileInput = document.getElementById('file');
+        var file = fileInput.files[0];
+
+        // Perform validation
+        if (!name || !level1 || !level2 || !level3 || !file) {
+            alert("Please fill in all fields");
+            return;
+        }
+
+        // Create FormData object to send form data asynchronously
+        var formData = new FormData();
+        formData.append('name', name);
+        formData.append('level1', level1);
+        formData.append('level2', level2);
+        formData.append('level3', level3);
+        formData.append('file', file);
+
+        // Send form data using fetch API
+        fetch('/submit_form', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle success response
+            console.log(data);
+            alert("Form submitted successfully!");
+            // Reset form fields if needed
+        })
+        .catch(error => {
+            // Handle error
+            console.error('There was a problem with the fetch operation:', error);
+            alert("An error occurred while submitting the form");
+        });
+}
+
 </script>
 
 </body>
