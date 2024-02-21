@@ -40,6 +40,43 @@
             vertical-align: middle;
         }
 
+        /* Sidebar Styles */
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            padding-top: 20px;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+            transition: 0.5s;
+        }
+
+        .sidebar a {
+            padding: 15px 15px 15px 30px;
+            text-decoration: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px;
+            color: black;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #3498db;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 16px;
+            min-height: 100vh;
+        }
+
+        .vertical-line {
+            border-left: 1px solid black; /* Add a vertical line between content and sidebar */
+            height: 100vh; /* Set the height of the line to match the viewport */
+            margin-left: 200px; /* Adjust the margin as needed */
+        }
+
     </style>
 </head>
 <body>
@@ -50,6 +87,15 @@
 
     <h2>Welcome {{admin_name}}</h2>
 </header>
+<!-- Sidebar -->
+<div class="sidebar">
+    
+    <a href="#">Add a File</a>
+    <a href="#">Review Change Requests</a>
+    
+</div>
+
+<div class="vertical-line"></div>
 
 
 </body>
