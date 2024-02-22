@@ -17,10 +17,10 @@ class DB_Helper:
     def add_file_record(self, tuple):
         ''' Inserts new data into the files table. '''
         query = "INSERT INTO files VALUES(?, ?, ?, ?)"
-        self.cur.execute(query, tuple)
+        self.cur.execute(query, (tuple,))
         self.con.commit()
         return True
-    
+
     def fetch_record(self, unique_id):
         '''This function extracts the records from the files database and forms a path using it.'''
         query = f"SELECT * FROM files WHERE File_Unique_ID = '{unique_id}';"
@@ -72,4 +72,4 @@ class Admin:
 if __name__ == '__main__':
     db_helper = DB_Helper()
     # record = db_helper.fetch_name('20240209-XyZ67AbCde')
-    # print(record)
+    db_helper.add_file_record(('20240209-A23bC87dE1','dandakosaurus','text','information','dianosaur','EXH-A-001'))

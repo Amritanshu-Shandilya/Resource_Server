@@ -1,7 +1,7 @@
 import sqlite3
 
-# conn = sqlite3.connect('museum.db')
-# cur = conn.cursor()
+conn = sqlite3.connect('museum.db')
+cur = conn.cursor()
 
 "Create the files table to hold data about files"
 # query = '''
@@ -70,9 +70,9 @@ import sqlite3
 
 "Creating a table to store admin data"
 
-import hashlib
-conn = sqlite3.connect('admin.db')
-cur = conn.cursor()
+# import hashlib
+# conn = sqlite3.connect('admin.db')
+# cur = conn.cursor()
 
 # query = '''
 # CREATE TABLE IF NOT EXISTS admin (
@@ -115,7 +115,9 @@ cur = conn.cursor()
             # );
             # '''
 
-# query = "SELECT * FROM admin"
+query = "SELECT file_name, lvl3 FROM files;"
+res = cur.execute(query)
+print(res.fetchall())
 
 # query = "DELETE FROM admin"
 # cur.execute(query, data)
