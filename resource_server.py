@@ -28,7 +28,7 @@ class ResourceServer:
         self.resource_server.route('/login', methods = ['GET','POST'])(self.login_module)
         self.resource_server.route('/admin')(self.admin_dashboard)
 
-        self.resource_server.route('/submitform', methods=['POST'])(self.add_new_record)
+        self.resource_server.route('/submit_form', methods=['POST'])(self.add_new_record)
         
         
 
@@ -84,6 +84,7 @@ class ResourceServer:
         file = request.files['file']
 
         destination_path = os.path.join('D:\\',level1, level2, level3) 
+        print(destination_path)
 
         unique_id = self.utility_tools.generate_unique_id()
         tag_id = self.utility_tools.get_tag_id(level3)

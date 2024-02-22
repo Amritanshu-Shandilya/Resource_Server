@@ -1,7 +1,9 @@
 import sqlite3
 
-conn = sqlite3.connect('museum.db')
+conn = sqlite3.connect('file_databse.db')
 cur = conn.cursor()
+
+# cur.execute("DROP TABLE IF EXISTS files;")
 
 "Create the files table to hold data about files"
 # query = '''
@@ -13,6 +15,8 @@ cur = conn.cursor()
 #     lvl3 TEXT,
 #     tag_id TEXT UNIQUE
 # );'''
+
+# cur.execute(query)
 
 "Create the users table to hold data about users"
 # query='''
@@ -40,11 +44,11 @@ cur = conn.cursor()
 
 "Entering values inside files table"
 # query = '''
-# INSERT INTO files VALUES('20240209-A23bC87dE1','dandakosaurus','text','information','dianosaur','EXH-A-001'),
-#                         ('20240209-Xyz456Pqrs','indosaurus','text','information','dianosaur','EXH-A-002'),
-#                         ('20240209-Lmno789Abc','saurian_rellic_01','text','information','dianosaur','EXH-A-003'),
-#                         ('20240209-DfgHij012K','thar_desert_ovum','text','information','dianosaur','EXH-A-004'),
-#                         ('20240209-ZzxYyWwVvU','tharosaurus_indicus','text','information','dianosaur','EXH-A-005'),
+# INSERT INTO files VALUES('20240209-A23bC87dE1','dandakosaurus','text','information','dinosaur','EXH-A-001'),
+#                         ('20240209-Xyz456Pqrs','indosaurus','text','information','dinosaur','EXH-A-002'),
+#                         ('20240209-Lmno789Abc','saurian_rellic_01','text','information','dinosaur','EXH-A-003'),
+#                         ('20240209-DfgHij012K','thar_desert_ovum','text','information','dinosaur','EXH-A-004'),
+#                         ('20240209-ZzxYyWwVvU','tharosaurus_indicus','text','information','dinosaur','EXH-A-005'),
 #                         ('20240209-Klm876NopQ','hamsa_damyanti_rrv','text','information','paintings','EXH-B-001'),
 #                         ('20240209-Jkl321XyZa','shakuntalam_rrv','text','information','paintings','EXH-B-002'),
 #                         ('20240209-PqR543lmno','the_milkmaid_rrv','text','information','paintings','EXH-B-003'),
@@ -55,6 +59,9 @@ cur = conn.cursor()
 #                         ('20240209-GHTre098Fg','deedarganj_yakshini','text','information','history','EXH-C-003'),
 #                         ('20240209-567BcdEfgH','samudragupta_coin','text','information','history','EXH-C-004'),
 #                         ('20240209-Pqrs90AaBc','sarnath_pillar','text','information','history','EXH-C-005')'''
+
+
+# cur.execute(query)
 
 "Entering values inside users table"
 # query = '''
@@ -115,14 +122,17 @@ cur = conn.cursor()
             # );
             # '''
 
-query = "SELECT file_name, lvl3 FROM files;"
-res = cur.execute(query)
-print(res.fetchall())
+# query = "DROP TABLE files;"
+# cur.execute(query)
+#print(res.fetchall())
 
 # query = "DELETE FROM admin"
 # cur.execute(query, data)
 # conn.commit()
 
+
+res = cur.execute("SELECT * FROM files")
+print(res.fetchall())
 
 
 # res = cur.execute("SELECT name FROM sqlite_master")

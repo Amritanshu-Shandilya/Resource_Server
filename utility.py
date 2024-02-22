@@ -5,7 +5,7 @@ import sqlite3
 
 class UtilityTool:
     def __init__(self):
-        self.exhibit_code = {'dianosaur':'EXH-A', 'paintings':'EXH-B', 'history':'EXH-C'}
+        self.exhibit_code = {'dinosaur':'EXH-A', 'paintings':'EXH-B', 'history':'EXH-C'}
 
     def generate_unique_id(self):
         timestamp = time.strftime("%Y%m%d")
@@ -14,7 +14,7 @@ class UtilityTool:
         return unique_id
 
     def get_tag_id(self, lvl3):
-        conn = sqlite3.connect('museum.db', check_same_thread=False)
+        conn = sqlite3.connect('file_databse.db', check_same_thread=False)
         cur = conn.cursor()
         
         code = self.exhibit_code[lvl3]

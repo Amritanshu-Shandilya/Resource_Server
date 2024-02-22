@@ -3,7 +3,7 @@ import sqlite3
 
 class DB_Helper:
     def __init__(self) -> None:
-        self.con = sqlite3.connect('museum.db',check_same_thread=False)
+        self.con = sqlite3.connect('file_databse.db',check_same_thread=False)
         self.cur = self.con.cursor()
 
     def authenticate_user(self, user_id):
@@ -16,8 +16,8 @@ class DB_Helper:
 
     def add_file_record(self, tuple):
         ''' Inserts new data into the files table. '''
-        query = "INSERT INTO files VALUES(?, ?, ?, ?)"
-        self.cur.execute(query, (tuple,))
+        query = "INSERT INTO files VALUES(?, ?, ?, ?, ?, ?)"
+        self.cur.execute(query, tuple)
         self.con.commit()
         return True
 
@@ -72,4 +72,4 @@ class Admin:
 if __name__ == '__main__':
     db_helper = DB_Helper()
     # record = db_helper.fetch_name('20240209-XyZ67AbCde')
-    db_helper.add_file_record(('20240209-A23bC87dE1','dandakosaurus','text','information','dianosaur','EXH-A-001'))
+    db_helper.add_file_record(('20240209-A23bC87dE1','dandakosaurus','text','information','dinosaur','EXH-A-001'))
