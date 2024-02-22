@@ -1,17 +1,20 @@
 from flask import Flask
 from flask import render_template
-from flask import request,redirect, url_for
+from flask import request, redirect, url_for, jsonify
 
 import hashlib
+import os
 
 
 from database_helper import DB_Helper, Admin
+from utility import UtilityTool
 
 class ResourceServer:
     def __init__(self, name) -> None:
 
         self.db_helper = DB_Helper()
         self.admin = Admin()
+        self.utility_tools = UtilityTool()
 
         self.extracted_data = None
 
@@ -24,6 +27,8 @@ class ResourceServer:
         self.resource_server.route('/get_name/<unique_id>')(self.get_name)
         self.resource_server.route('/login', methods = ['GET','POST'])(self.login_module)
         self.resource_server.route('/admin')(self.admin_dashboard)
+
+        self.resource_server.route('/submitform', methods=['POST'])(self.add_new_record)
         
         
 
@@ -44,7 +49,7 @@ class ResourceServer:
     
 
     def admin_dashboard(self):
-        
+        '''This function displays admin_dashboard'''
         name = self.admin.getname()
 
         return render_template('admin_dashboard.html', admin_name = name[0])
@@ -71,6 +76,26 @@ class ResourceServer:
         file_name = self.db_helper.fetch_name(unique_id)
         return file_name
     
+    def add_new_record(self):
+        name = request.form.get('name')
+        level1 = request.form.get('level1')
+        level2 = request.form.get('level2')
+        level3 = request.form.get('level3')
+        file = request.files['file']
+
+        destination_path = os.path.join('D:\\',level1, level2, level3) 
+
+        unique_id = self.utility_tools.generate_unique_id()
+        tag_id = self.utility_tools.get_tag_id(level3)
+
+        data_tuple = (unique_id, name, level1, level2, level3, tag_id)
+
+        if self.db_helper.add_file_record(tuple=data_tuple):
+            return jsonify({'message':'Data uploaded successfully!'})
+        
+        file.save(os.path.join(destination_path, file.filename))
+
+
     def request_processor(self):
         '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''
         id, name, lv1, lv2, lv3 = self.extracted_data
