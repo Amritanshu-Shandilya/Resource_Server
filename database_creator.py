@@ -1,7 +1,7 @@
 import sqlite3
 
-conn = sqlite3.connect('file_databse.db')
-cur = conn.cursor()
+# conn = sqlite3.connect('museum_database.db')
+# cur = conn.cursor()
 
 # cur.execute("DROP TABLE IF EXISTS files;")
 
@@ -36,6 +36,8 @@ cur = conn.cursor()
 #     FOREIGN KEY (file_unique_id) REFERENCES files(file_unique_id) ON DELETE CASCADE ON UPDATE CASCADE
 # );'''
 
+# cur.execute(query)
+
 "Verify the creation of the tables"
 # query = "SELECT name FROM sqlite_master WHERE type='table';"
 # res = cur.execute(query)
@@ -62,6 +64,7 @@ cur = conn.cursor()
 
 
 # cur.execute(query)
+# conn.commit()
 
 "Entering values inside users table"
 # query = '''
@@ -70,16 +73,16 @@ cur = conn.cursor()
 #                         ('nobi_003', 'Sameer')'''
 
 
-
-# conn.close()
+# cur.execute(query)
+# conn.commit()
 
 
 
 "Creating a table to store admin data"
 
-# import hashlib
-# conn = sqlite3.connect('admin.db')
-# cur = conn.cursor()
+import hashlib
+conn = sqlite3.connect('admin.db')
+cur = conn.cursor()
 
 # query = '''
 # CREATE TABLE IF NOT EXISTS admin (
@@ -131,11 +134,11 @@ cur = conn.cursor()
 # conn.commit()
 
 
-# res = cur.execute("SELECT * FROM files")
-# print(res.fetchall())
-
-
-res = cur.execute("SELECT name FROM sqlite_master")
+res = cur.execute("SELECT * FROM admin")
 print(res.fetchall())
+
+
+# res = cur.execute("SELECT name FROM sqlite_master")
+# print(res.fetchall())
 
 conn.close()
