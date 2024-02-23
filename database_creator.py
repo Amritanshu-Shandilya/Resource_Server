@@ -1,7 +1,7 @@
 import sqlite3
 
-# conn = sqlite3.connect('museum_database.db')
-# cur = conn.cursor()
+conn = sqlite3.connect('museum_database.db')
+cur = conn.cursor()
 
 # cur.execute("DROP TABLE IF EXISTS files;")
 
@@ -80,9 +80,9 @@ import sqlite3
 
 "Creating a table to store admin data"
 
-import hashlib
-conn = sqlite3.connect('admin.db')
-cur = conn.cursor()
+# import hashlib
+# conn = sqlite3.connect('admin.db')
+# cur = conn.cursor()
 
 # query = '''
 # CREATE TABLE IF NOT EXISTS admin (
@@ -134,8 +134,8 @@ cur = conn.cursor()
 # conn.commit()
 
 
-res = cur.execute("SELECT * FROM admin")
-print(res.fetchall())
+# res = cur.execute("SELECT * FROM admin")
+# print(res.fetchall())
 
 
 # res = cur.execute("SELECT name FROM sqlite_master")
