@@ -14,7 +14,7 @@ class UtilityTool:
         return unique_id
 
     def get_tag_id(self, lvl3):
-        conn = sqlite3.connect('file_databse.db', check_same_thread=False)
+        conn = sqlite3.connect('museum_database.db', check_same_thread=False)
         cur = conn.cursor()
         
         code = self.exhibit_code[lvl3]
