@@ -131,11 +131,11 @@ cur = conn.cursor()
 # conn.commit()
 
 
-res = cur.execute("SELECT * FROM files")
-print(res.fetchall())
-
-
-# res = cur.execute("SELECT name FROM sqlite_master")
+# res = cur.execute("SELECT * FROM files")
 # print(res.fetchall())
+
+
+res = cur.execute("SELECT name FROM sqlite_master")
+print(res.fetchall())
 
 conn.close()

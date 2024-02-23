@@ -96,10 +96,23 @@
             left: 25%;
         }
 
-        .review{
-            position: absolute;
-            bottom: 64%;
-            right: 17%;
+        .history.active {
+        background-color: #3498db;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        width: 100%;
+        border: 2px solid #fff;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 15px;
+        display: block;
+        }
+
+        /* Override hover styles for the active state */
+        .history.active:hover {
+            background-color: #3498db;
+            color: #fff;
         }
 
         .sidebar a:hover {
@@ -203,8 +216,7 @@
 <div class="sidebar">
     
     <a href="#" class="file" id="addfilebutton" onclick="showForm()">Add a File</a>
-    <a href="#" class="review">Change Requests</a>
-    <a href="#" class="history">Veiw History</a>
+    <a href="#" class="history" id="viewhistorybutton" onclick="showHistory()">Veiw History</a>
     <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
@@ -241,6 +253,29 @@
     </form>
 </div>
 
+<!-- History Table -->
+<div class="content" id="historyContent" style="display: none;">
+    <h1>Admin History</h1>
+    <table class="history-table">
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>File Unique ID</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody id="historyTableBody">
+            {% for row in history_data %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 <script>
     function showForm() {
         var addButton = document.getElementById('addfilebutton');
@@ -248,6 +283,12 @@
 
         var form = document.getElementById('fileForm');
         form.style.display = 'block';
+    }
+
+
+    function showHistory(){
+        var histButton = document.getElementById('viewhistorybutton');
+        histButton.classList.toggle('active');
     }
 
     function submitForm() {
@@ -291,6 +332,29 @@
         });
 }
 
+function showHistory() {
+        var historyTableBody = document.getElementById('historyTableBody');
+        var rows = historyTableBody.getElementsByTagName('tr');
+
+        // Add click event listener to each row
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].addEventListener('click', function() {
+                // Access the data of the clicked row
+                var userId = this.cells[0].innerText;
+                var fileUniqueId = this.cells[1].innerText;
+                var timestamp = this.cells[2].innerText;
+
+                // Handle the data as needed (e.g., display in console)
+                console.log('User ID:', userId);
+                console.log('File Unique ID:', fileUniqueId);
+                console.log('Timestamp:', timestamp);
+            });
+        }
+
+        // Display the history content
+        document.getElementById('historyContent').style.display = 'block';
+    }
+    
 </script>
 
 </body>

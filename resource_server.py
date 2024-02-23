@@ -91,10 +91,22 @@ class ResourceServer:
 
         data_tuple = (unique_id, name, level1, level2, level3, tag_id)
 
-        if self.db_helper.add_file_record(tuple=data_tuple):
-            return jsonify({'message':'Data uploaded successfully!'})
-        
-        file.save(os.path.join(destination_path, file.filename))
+        os.makedirs(destination_path, exist_ok=True)
+
+        try:
+            # Save the file
+            file.save(os.path.join(destination_path, file.filename))
+            print(f"File saved successfully: {file.filename}")
+
+            if self.db_helper.add_file_record(tuple=data_tuple):
+                return jsonify({"message": "Data uploaded successfully!"})
+
+        except Exception as e:
+            print(f"Error saving file: {e}")
+
+            return jsonify({"message": f"Error uploading Data {e}"})
+
+
 
 
     def request_processor(self):
