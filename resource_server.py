@@ -128,6 +128,9 @@ class ResourceServer:
     def add_history(self, user_id, unique_id, timestamp):
         if self.db_helper.add_to_history(user_id, unique_id, timestamp):
             return True
+        else:
+            print("Failed to add to history.")
+            return False
 
     def request_listener(self, user_id, unique_id, time_stamp):
         '''This function listens the requests and processes it to get the record of the accessed file and sends it to be processed. 
