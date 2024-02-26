@@ -111,7 +111,7 @@ class ResourceServer:
 
     def request_processor(self):
         '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''
-        id, name, lv1, lv2, lv3 = self.extracted_data
+        id, name, lv1, lv2, lv3, tag_id = self.extracted_data
         # creating the path
         path = 'D:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
 

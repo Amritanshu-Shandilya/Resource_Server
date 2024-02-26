@@ -3,7 +3,7 @@ import sqlite3
 
 class DB_Helper:
     def __init__(self) -> None:
-        self.con = sqlite3.connect('file_databse.db',check_same_thread=False)
+        self.con = sqlite3.connect('museum_database.db',check_same_thread=False)
         self.cur = self.con.cursor()
 
     def authenticate_user(self, user_id):
