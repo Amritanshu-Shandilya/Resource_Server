@@ -15,6 +15,7 @@ class UtilityTool:
         return unique_id
 
     def get_tag_id(self, lvl3):
+        '''This function returns the tag id of a specific record'''
         conn = sqlite3.connect('museum_database.db', check_same_thread=False)
         cur = conn.cursor()
         
