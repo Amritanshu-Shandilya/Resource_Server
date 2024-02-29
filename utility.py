@@ -8,6 +8,7 @@ class UtilityTool:
         self.exhibit_code = {'dinosaur':'EXH-A', 'paintings':'EXH-B', 'history':'EXH-C'}
 
     def generate_unique_id(self):
+        '''This functions generates a unique id for the records that are inserted inside the database'''
         timestamp = time.strftime("%Y%m%d")
         random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
         unique_id = f"{timestamp}-{random_string}"
