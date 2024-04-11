@@ -72,16 +72,17 @@
         }
 
         .file.active {
-        background-color: #3498db;
+            background-color: #3498db;
         color: #fff;
         font-weight: bold;
         font-size: 18px;
-        width: 100%;
+        width: 70%;
         border: 2px solid #fff;
         box-sizing: border-box;
         text-align: center;
         padding: 15px;
-        display: block;
+        display: absolute;
+        left: 20%;
         }
 
         /* Override hover styles for the active state */
@@ -98,15 +99,16 @@
 
         .history.active {
             background-color: #3498db;
-            color: #fff;
-            font-weight: bold;
-            font-size: 18px;
-            width: 100%;
-            border: 2px solid #fff;
-            box-sizing: border-box;
-            text-align: center;
-            padding: 15px;
-            display: block;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        width: 70%;
+        border: 2px solid #fff;
+        box-sizing: border-box;
+        text-align: center;
+        padding: 15px;
+        display: absolute;
+        left: 20%;
         }
 
         /* Override hover styles for the active state */
@@ -123,6 +125,8 @@
             margin-left: 200px;
             padding: 16px;
             min-height: 100vh;
+            position: absolute;
+            top: 20%;
         }
 
         .vertical-line {
@@ -216,7 +220,7 @@
 <div class="sidebar">
     
     <a href="#" class="file" id="addfilebutton" onclick="showForm()">Add a File</a>
-    <a href="#" class="history" id="viewhistorybutton" onclick="showHistory()">Veiw History</a>
+    <a href="#" class="history" id="viewhistorybutton" onclick="toggleHistory()">View History</a>
     <a href="/login" class="logout-link">LOGOUT</a>
     
 </div>
@@ -282,13 +286,24 @@
         addButton.classList.toggle('active');
 
         var form = document.getElementById('fileForm');
-        form.style.display = 'block';
+        if (form.style.display === 'block'){
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
+        }
     }
 
 
-    function showHistory(){
+    function toggleHistory(){
         var histButton = document.getElementById('viewhistorybutton');
         histButton.classList.toggle('active');
+
+        var history = document.getElementById('historyContent');
+        if (history.style.display === 'block' || history.style.display === ''){
+            history.style.display = 'none';
+        } else {
+            history.style.display = 'block';
+        }
     }
 
     function submitForm() {
