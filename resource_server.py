@@ -113,7 +113,7 @@ class ResourceServer:
         '''This function takes the record data and uses it to get the contents of the file data and send it as a response to the client'''
         id, name, lv1, lv2, lv3, tag_id = self.extracted_data
         # creating the path
-        path = 'D:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
+        path = 'E:/'+lv1+'/'+lv2+'/'+lv3+'/'+name+'.txt'
 
         with open(path, 'r') as file:
             file_content = file.read()

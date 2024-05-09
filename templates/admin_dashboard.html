@@ -267,8 +267,62 @@
                 <th>File Unique ID</th>
                 <th>Timestamp</th>
             </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-GHTre098Fg</td>
+                <td>2024-02-26 22:23:29</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-GHTre098Fg</td>
+                <td>2024-02-26 22:24:49</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Lkji21NhgF</td>
+                <td>2024-02-26 22:32:12</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Lkji21NhgF</td>
+                <td>2024-02-26 22:33:49</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Lkji21NhgF</td>
+                <td>2024-02-26 22:47:38</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Lkji21NhgF</td>
+                <td>2024-02-26 23:05:46</td>
+            </tr><tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Xyz456Pqrs</td>
+                <td>2024-02-26 23:14:12</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-Jkl321XyZa</td>
+                <td>2024-03-1 11:34:09</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-GHTre098Fg</td>
+                <td>2024-03-1 11:34:09</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-UVWxyz12Ab</td>
+                <td>2024-04-12 00:08:33</td>
+            </tr>
+            <tr>
+                <td>amrit_sandy02</td>
+                <td>20240209-UVWxyz12Ab</td>
+                <td>2024-04-12 00:17:34</td>
+            </tr>
         </thead>
-        <tbody id="historyTableBody">
+        <!-- <tbody id="historyTableBody">
             {% for row in history_data %}
                 <tr>
                     <td>{{ row[0] }}</td>
@@ -276,7 +330,7 @@
                     <td>{{ row[2] }}</td>
                 </tr>
             {% endfor %}
-        </tbody>
+        </tbody> -->
     </table>
 </div>
 
@@ -294,17 +348,20 @@
     }
 
 
-    function toggleHistory(){
-        var histButton = document.getElementById('viewhistorybutton');
-        histButton.classList.toggle('active');
+    function toggleHistory() {
+    var histButton = document.getElementById('viewhistorybutton');
+    histButton.classList.toggle('active');
 
-        var history = document.getElementById('historyContent');
-        if (history.style.display === 'block' || history.style.display === ''){
-            history.style.display = 'none';
-        } else {
-            history.style.display = 'block';
-        }
+    var history = document.getElementById('historyContent');
+    if (history.style.display === 'block' || history.style.display === '') {
+        history.style.display = 'none';
+    } else {
+        history.style.display = 'block';
+        // Call fetchData() when showing the history content
+        fetchData();
     }
+}
+
 
     function submitForm() {
         var name = document.getElementById('name').value;
@@ -369,6 +426,26 @@ function showHistory() {
         // Display the history content
         document.getElementById('historyContent').style.display = 'block';
     }
+
+    function fetchData() {
+    // Make an AJAX request to fetch data from the database
+    fetch('/api/history')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Update the webpage with the fetched data
+            displayData(data);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+
     
 </script>
 
